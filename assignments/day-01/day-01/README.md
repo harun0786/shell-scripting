@@ -6,7 +6,7 @@ kernel
 the kernel manages system resources and communicates with the the hardware
 hardware
 the hardware performs the actual pyhsical opertions requested by the kernel
-question
+question ?
 q when a user types a command which layer reads the command first
 the shell/bash layer reads the command first
 
