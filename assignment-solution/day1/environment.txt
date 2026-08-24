@@ -1,0 +1,12 @@
+LINUX ENVIRONMENT INFORMATION
+=============================
+Current user:
+root
+Hostname:
+DESKTOP-F33AI5C
+Current directory:
+/home/assigment/day1
+Login shell:
+/bin/bash
+Kernel:
+6.18.33.2-microsoft-standard-WSL2

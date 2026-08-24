@@ -1,0 +1,2 @@
+NIT:hello doston
+welcome to bash scripting day2
