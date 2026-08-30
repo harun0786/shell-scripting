@@ -1,154 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Mohammad Harun — MERN Stack Developer portfolio" />
-  <title>Mohammad Harun | MERN Stack Developer</title>
-  <style>
-    :root { --bg:#070b16; --surface:rgba(255,255,255,.07); --border:rgba(255,255,255,.13); --text:#f7f8fc; --muted:#aeb7ca; --accent:#7c5cff; --accent2:#20d9c5; }
-    * { box-sizing:border-box; margin:0; padding:0; }
-    html { scroll-behavior:smooth; }
-    body { font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; color:var(--text); background:radial-gradient(circle at 15% 10%,rgba(124,92,255,.20),transparent 30%),radial-gradient(circle at 85% 25%,rgba(32,217,197,.12),transparent 28%),var(--bg); line-height:1.6; }
-    a { color:inherit; text-decoration:none; }
-    .container { width:min(1120px,92%); margin:auto; }
-    nav { position:fixed; top:0; left:0; right:0; z-index:20; background:rgba(7,11,22,.68); backdrop-filter:blur(18px); border-bottom:1px solid var(--border); }
-    .nav-inner { height:72px; display:flex; align-items:center; justify-content:space-between; }
-    .logo { font-weight:800; letter-spacing:.5px; }
-    .logo span { color:var(--accent2); }
-    .nav-links { display:flex; gap:26px; color:var(--muted); font-size:.95rem; }
-    .nav-links a:hover { color:var(--text); }
-    .hero { min-height:100vh; display:grid; place-items:center; padding:120px 0 70px; }
-    .hero-grid { display:grid; grid-template-columns:1.2fr .8fr; gap:60px; align-items:center; }
-    .eyebrow { color:var(--accent2); font-weight:700; text-transform:uppercase; letter-spacing:2px; font-size:.8rem; margin-bottom:18px; }
-    h1 { font-size:clamp(3rem,7vw,6.5rem); line-height:.95; letter-spacing:-4px; margin-bottom:24px; }
-    h1 span { background:linear-gradient(90deg,var(--accent),var(--accent2)); -webkit-background-clip:text; background-clip:text; color:transparent; }
-    .hero p { color:var(--muted); font-size:1.12rem; max-width:650px; }
-    .actions { display:flex; gap:14px; margin-top:30px; flex-wrap:wrap; }
-    .btn { padding:12px 20px; border-radius:12px; border:1px solid var(--border); background:var(--surface); transition:.25s; font-weight:700; }
-    .btn.primary { background:linear-gradient(135deg,var(--accent),#5d8cff); border:0; }
-    .btn:hover { transform:translateY(-3px); }
-    .glass { background:var(--surface); border:1px solid var(--border); box-shadow:0 25px 70px rgba(0,0,0,.28); backdrop-filter:blur(18px); border-radius:24px; }
-    .profile-card { padding:34px; position:relative; overflow:hidden; }
-    .profile-card::before { content:""; position:absolute; width:180px; height:180px; border-radius:50%; background:var(--accent); filter:blur(70px); opacity:.28; top:-70px; right:-50px; }
-    .initials { width:100px; height:100px; border-radius:28px; display:grid; place-items:center; font-size:2.2rem; font-weight:900; background:linear-gradient(135deg,var(--accent),var(--accent2)); margin-bottom:25px; }
-    .profile-card h2 { font-size:1.55rem; margin-bottom:5px; }
-    .profile-card p { color:var(--muted); }
-    .contact-line { margin-top:24px; padding-top:20px; border-top:1px solid var(--border); color:var(--muted); font-size:.92rem; }
-    section { padding:95px 0; }
-    .section-head { margin-bottom:40px; }
-    .section-head .eyebrow { margin-bottom:8px; }
-    h2.section-title { font-size:clamp(2rem,4vw,3rem); letter-spacing:-1.5px; }
-    .about { display:grid; grid-template-columns:1fr 1fr; gap:24px; }
-    .card { padding:28px; }
-    .card p { color:var(--muted); }
-    .skills { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; }
-    .skill { padding:20px; min-height:150px; }
-    .skill h3 { margin-bottom:10px; }
-    .skill p { color:var(--muted); font-size:.92rem; }
-    .projects { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
-    .project { padding:26px; min-height:250px; display:flex; flex-direction:column; }
-    .project-number { color:var(--accent2); font-weight:800; font-size:.85rem; }
-    .project h3 { margin:12px 0 8px; font-size:1.3rem; }
-    .project p { color:var(--muted); font-size:.92rem; }
-    .tech { margin-top:auto; padding-top:20px; color:#d8dcf0; font-size:.82rem; }
-    .timeline { padding:28px; }
-    .timeline-row { display:flex; justify-content:space-between; gap:30px; padding:22px 0; border-bottom:1px solid var(--border); }
-    .timeline-row:last-child { border-bottom:0; }
-    .timeline-row strong { font-size:1.05rem; }
-    .timeline-row span { color:var(--muted); text-align:right; }
-    .contact { text-align:center; padding:55px 30px; }
-    .contact p { color:var(--muted); margin:12px auto 24px; max-width:600px; }
-    footer { border-top:1px solid var(--border); padding:28px 0; color:var(--muted); text-align:center; font-size:.9rem; }
-    .reveal { opacity:0; transform:translateY(20px); transition:.7s ease; }
-    .reveal.show { opacity:1; transform:none; }
-    @media(max-width:850px) { .hero-grid,.about { grid-template-columns:1fr; } .skills { grid-template-columns:repeat(2,1fr); } .projects { grid-template-columns:1fr; } h1 { letter-spacing:-2px; } .nav-links { display:none; } }
-    @media(max-width:520px) { .skills { grid-template-columns:1fr; } section { padding:70px 0; } .timeline-row { flex-direction:column; gap:5px; } .timeline-row span { text-align:left; } }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="Mohammad Harun — MERN Stack Developer Portfolio" />
+<title>Mohammad Harun | MERN Stack Developer</title>
+<style>
+:root{--bg:#050816;--card:rgba(255,255,255,.055);--border:rgba(255,255,255,.12);--text:#f8fafc;--muted:#9ba7bd;--purple:#8b5cf6;--blue:#3b82f6;--cyan:#22d3ee;--max:1180px;--radius:24px}*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}body{font-family:Inter,system-ui,sans-serif;background:radial-gradient(circle at 10% 10%,rgba(139,92,246,.18),transparent 30%),radial-gradient(circle at 90% 20%,rgba(34,211,238,.12),transparent 30%),var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden}a{color:inherit;text-decoration:none}.container{width:min(var(--max),92%);margin:auto}.navbar{position:fixed;top:18px;left:50%;transform:translateX(-50%);width:min(1120px,92%);z-index:100;background:rgba(5,8,22,.72);backdrop-filter:blur(20px);border:1px solid var(--border);border-radius:18px}.nav-inner{height:68px;padding:0 20px;display:flex;align-items:center;justify-content:space-between}.logo{font-weight:800}.logo span,.section-label,.hero-card-role{color:var(--cyan)}.nav-links{display:flex;align-items:center;gap:28px}.nav-links a{color:var(--muted);font-size:.88rem;font-weight:600}.nav-links a:hover,.nav-links a.active{color:white}.nav-contact{padding:9px 16px;border-radius:10px;background:linear-gradient(135deg,var(--purple),var(--blue));color:white!important}.menu-btn{display:none;border:1px solid var(--border);background:var(--card);color:white;width:42px;height:42px;border-radius:11px;cursor:pointer}.hero{min-height:100vh;display:flex;align-items:center;padding:150px 0 90px}.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;align-items:center;gap:70px}.available{display:inline-flex;align-items:center;gap:9px;padding:7px 12px;margin-bottom:24px;border:1px solid rgba(34,211,238,.2);background:rgba(34,211,238,.06);border-radius:999px;color:#b6f5fc;font-size:.75rem;font-weight:700}.available-dot{width:7px;height:7px;background:#22c55e;border-radius:50%}.hero h1{font-size:clamp(3.2rem,7vw,6.5rem);line-height:.95;letter-spacing:-5px;margin-bottom:26px}.gradient-text{background:linear-gradient(100deg,var(--purple),var(--blue),var(--cyan));-webkit-background-clip:text;background-clip:text;color:transparent}.hero-description{max-width:650px;color:var(--muted);font-size:1.08rem;line-height:1.8}.hero-actions{display:flex;gap:13px;flex-wrap:wrap;margin-top:32px}.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;padding:13px 20px;border-radius:13px;border:1px solid var(--border);background:var(--card);font-size:.88rem;font-weight:700;transition:.3s}.btn:hover{transform:translateY(-4px);background:rgba(255,255,255,.09)}.btn-primary{border:none;background:linear-gradient(135deg,var(--purple),var(--blue))}.hero-card,.glass-card{background:var(--card);border:1px solid var(--border);backdrop-filter:blur(20px);box-shadow:0 30px 80px rgba(0,0,0,.3);border-radius:var(--radius)}.hero-card{padding:35px;min-height:430px;display:flex;flex-direction:column;justify-content:center;overflow:hidden}.avatar{width:105px;height:105px;display:grid;place-items:center;border-radius:28px;background:linear-gradient(135deg,var(--purple),var(--blue),var(--cyan));font-size:2.4rem;font-weight:900;margin-bottom:28px}.hero-card h2{font-size:1.8rem}.hero-card-location{color:var(--muted);font-size:.85rem}.hero-card-bottom{margin-top:30px;padding-top:22px;border-top:1px solid var(--border);display:flex;justify-content:space-between;gap:20px}.mini-stat strong{display:block;font-size:1.15rem}.mini-stat span{color:var(--muted);font-size:.7rem}section{padding:110px 0}.section-label{font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:2px;margin-bottom:9px}.section-title{font-size:clamp(2.2rem,5vw,3.8rem);line-height:1;letter-spacing:-2.5px}.section-subtitle{color:var(--muted);max-width:650px;margin-top:16px}.section-heading{margin-bottom:48px}.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px}.about-card{padding:32px;transition:.35s}.about-card:hover,.skill-card:hover,.project-card:hover{transform:translateY(-6px);background:rgba(255,255,255,.09)}.about-card h3{margin-bottom:14px}.about-card p,.skill-card p,.project-card p{color:var(--muted);line-height:1.8}.skills-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}.skill-card{padding:25px;min-height:190px;transition:.35s}.skill-icon{width:45px;height:45px;display:grid;place-items:center;border-radius:13px;background:rgba(139,92,246,.12);margin-bottom:20px;color:#c4b5fd;font-size:.8rem;font-weight:800}.skill-card h3{margin-bottom:9px}.skill-card p{font-size:.85rem}.skill-tags{margin-top:45px;display:flex;gap:9px;flex-wrap:wrap}.tag,.project-tech span{padding:7px 10px;border-radius:8px;background:rgba(255,255,255,.045);border:1px solid var(--border);color:#c9d2e4;font-size:.73rem}.projects-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}.project-card{min-height:390px;padding:28px;display:flex;flex-direction:column;transition:.35s;overflow:hidden}.project-number{color:var(--cyan);font-size:.72rem;font-weight:800;letter-spacing:2px}.project-card h3{margin-top:18px;font-size:1.45rem}.project-card p{margin-top:12px;font-size:.88rem}.project-tech{display:flex;flex-wrap:wrap;gap:7px;margin-top:20px}.project-link{margin-top:auto;padding-top:25px;font-size:.82rem;font-weight:700}.project-link span{transition:.25s}.project-link:hover span{transform:translateX(5px)}.timeline{padding:35px}.timeline-item{position:relative;padding:0 0 42px 30px}.timeline-item:last-child{padding-bottom:0}.timeline-item:before{content:"";position:absolute;left:0;top:5px;width:13px;height:13px;border-radius:50%;background:var(--purple);box-shadow:0 0 18px rgba(139,92,246,.6)}.timeline-item:not(:last-child):after{content:"";position:absolute;left:6px;top:18px;bottom:0;width:1px;background:linear-gradient(var(--purple),var(--cyan))}.timeline-item h3{font-size:1.15rem}.place{color:var(--cyan);font-size:.84rem;margin-top:4px}.date{color:var(--muted);font-size:.75rem}.contact-card{padding:65px 35px;text-align:center;position:relative;overflow:hidden}.contact-card p{max-width:620px;margin:17px auto 30px;color:var(--muted)}.contact-buttons{display:flex;justify-content:center;flex-wrap:wrap;gap:12px}.social-btn{min-width:150px}.social-icon{font-weight:900}footer{padding:30px 0;border-top:1px solid var(--border);color:var(--muted);text-align:center;font-size:.78rem}.reveal{opacity:0;transform:translateY(28px);transition:.7s}.reveal.visible{opacity:1;transform:none}@media(max-width:950px){.hero-grid{grid-template-columns:1fr;gap:45px}.skills-grid{grid-template-columns:repeat(2,1fr)}.projects-grid{grid-template-columns:1fr}}@media(max-width:760px){.navbar{top:10px}.nav-links{position:absolute;top:76px;left:0;right:0;display:none;flex-direction:column;align-items:stretch;gap:0;padding:10px;background:rgba(5,8,22,.96);border:1px solid var(--border);border-radius:16px}.nav-links.open{display:flex}.nav-links a{padding:13px}.nav-contact{text-align:center}.menu-btn{display:block}.about-grid{grid-template-columns:1fr}}@media(max-width:520px){section{padding:80px 0}.skills-grid{grid-template-columns:1fr}.hero{padding-top:125px}.hero h1{font-size:3.3rem;letter-spacing:-3px}.hero-card-bottom{flex-direction:column;gap:13px}.contact-card{padding:50px 22px}}
+</style>
 </head>
 <body>
-  <nav>
-    <div class="container nav-inner">
-      <a class="logo" href="#home">Mohammad <span>Harun</span></a>
-      <div class="nav-links">
-        <a href="#about">About</a><a href="#skills">Skills</a><a href="#projects">Projects</a><a href="#education">Education</a><a href="#contact">Contact</a>
-      </div>
-    </div>
-  </nav>
-
-  <main>
-    <section class="hero" id="home">
-      <div class="container hero-grid">
-        <div class="reveal">
-          <div class="eyebrow">MERN Stack Developer · Fresher</div>
-          <h1>Building the web with <span>modern technology.</span></h1>
-          <p>Detail-oriented MERN Stack Developer with hands-on experience in React.js, Node.js, Express.js, MongoDB, and Tailwind CSS. Focused on responsive interfaces, API integration, and continuous learning.</p>
-          <div class="actions"><a class="btn primary" href="#projects">View Projects</a><a class="btn" href="#contact">Contact Me</a></div>
-        </div>
-        <div class="glass profile-card reveal">
-          <div class="initials">MH</div>
-          <h2>Mohammad Harun</h2>
-          <p>Jaipur, Rajasthan</p>
-          <div class="contact-line">+91 9664149092</div>
-        </div>
-      </div>
-    </section>
-
-    <section id="about">
-      <div class="container">
-        <div class="section-head reveal"><div class="eyebrow">01 · About</div><h2 class="section-title">A developer with a practical mindset.</h2></div>
-        <div class="about">
-          <div class="glass card reveal"><p>I am a fresher MERN Stack Developer with a strong foundation in HTML, CSS, and JavaScript and hands-on work with modern frontend and backend technologies.</p></div>
-          <div class="glass card reveal"><p>I enjoy building responsive user interfaces, integrating APIs, solving development problems, and contributing in collaborative team environments.</p></div>
-        </div>
-      </div>
-    </section>
-
-    <section id="skills">
-      <div class="container">
-        <div class="section-head reveal"><div class="eyebrow">02 · Skills</div><h2 class="section-title">My technical toolkit.</h2></div>
-        <div class="skills">
-          <div class="glass skill reveal"><h3>Frontend</h3><p>HTML5 · CSS3 · JavaScript · React.js · Next.js · Tailwind CSS · Bootstrap</p></div>
-          <div class="glass skill reveal"><h3>Backend</h3><p>Node.js · Express.js</p></div>
-          <div class="glass skill reveal"><h3>Database</h3><p>MongoDB</p></div>
-          <div class="glass skill reveal"><h3>Tools</h3><p>Git · GitHub · VS Code</p></div>
-        </div>
-      </div>
-    </section>
-
-    <section id="projects">
-      <div class="container">
-        <div class="section-head reveal"><div class="eyebrow">03 · Projects</div><h2 class="section-title">Selected work.</h2></div>
-        <div class="projects">
-          <article class="glass project reveal"><div class="project-number">01</div><h3>Weather App</h3><p>Fetched real-time weather data using the OpenWeather API and displayed temperature, humidity, and conditions by city.</p><div class="tech">JavaScript · API</div></article>
-          <article class="glass project reveal"><div class="project-number">02</div><h3>Movie Search App</h3><p>Integrated an external API to fetch and display real-time movie details with search functionality and a responsive UI.</p><div class="tech">React.js · API</div></article>
-          <article class="glass project reveal"><div class="project-number">03</div><h3>Demo Kart</h3><p>Built a responsive e-commerce frontend with product listings, categories, shopping cart features, and reusable UI components.</p><div class="tech">React.js · Tailwind CSS</div></article>
-        </div>
-      </div>
-    </section>
-
-    <section id="education">
-      <div class="container">
-        <div class="section-head reveal"><div class="eyebrow">04 · Education</div><h2 class="section-title">Education & development.</h2></div>
-        <div class="glass timeline reveal">
-          <div class="timeline-row"><strong>Bachelor of Computer Applications (BCA)</strong><span>Vivekananda Global University, Jaipur<br>2022 – 2026</span></div>
-          <div class="timeline-row"><strong>MERN Stack Development</strong><span>WsCube Tech, Jaipur<br>2025 – Present</span></div>
-        </div>
-      </div>
-    </section>
-
-    <section id="contact">
-      <div class="container">
-        <div class="glass contact reveal"><div class="eyebrow">05 · Contact</div><h2 class="section-title">Let's build something useful.</h2><p>For professional opportunities or collaboration, you can reach me directly by phone.</p><a class="btn primary" href="tel:+919664149092">Call +91 9664149092</a></div>
-      </div>
-    </section>
-  </main>
-
-  <footer><div class="container">© <span id="year"></span> Mohammad Harun · MERN Stack Developer</div></footer>
-  <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
-    const observer = new IntersectionObserver(entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('show'); }), { threshold: .12 });
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-  </script>
+<nav class="navbar"><div class="nav-inner"><a href="#home" class="logo">Mohammad <span>Harun</span></a><div class="nav-links" id="navLinks"><a href="#about">About</a><a href="#skills">Skills</a><a href="#projects">Projects</a><a href="#education">Education</a><a href="#contact" class="nav-contact">Let's Talk</a></div><button class="menu-btn" id="menuBtn" aria-label="Open navigation menu">☰</button></div></nav>
+<main>
+<section class="hero" id="home"><div class="container hero-grid"><div class="reveal"><div class="available"><span class="available-dot"></span>MERN Stack Developer · Fresher</div><h1>Turning ideas into <span class="gradient-text">modern web experiences.</span></h1><p class="hero-description">Detail-oriented MERN Stack Developer with hands-on experience building responsive interfaces, integrating APIs, and working with modern frontend and backend technologies.</p><div class="hero-actions"><a href="#projects" class="btn btn-primary">View My Work ↗</a><a href="#contact" class="btn">Contact Me</a></div></div><div class="hero-card reveal"><div class="avatar">MH</div><h2>Mohammad Harun</h2><div class="hero-card-role">MERN Stack Developer</div><div class="hero-card-location">📍 Jaipur, Rajasthan</div><div class="hero-card-bottom"><div class="mini-stat"><strong>3</strong><span>Featured Projects</span></div><div class="mini-stat"><strong>MERN</strong><span>Development Stack</span></div><div class="mini-stat"><strong>2026</strong><span>BCA Graduation</span></div></div></div></div></section>
+<section id="about"><div class="container"><div class="section-heading reveal"><div class="section-label">01 · About</div><h2 class="section-title">A developer focused on <span class="gradient-text">building.</span></h2><p class="section-subtitle">I enjoy turning concepts into responsive, usable and modern web interfaces while continuously improving my development skills.</p></div><div class="about-grid"><div class="glass-card about-card reveal"><h3>Practical Development</h3><p>I am a fresher MERN Stack Developer with a strong foundation in HTML, CSS and JavaScript and hands-on experience with React.js, Node.js, Express.js, MongoDB and Tailwind CSS.</p></div><div class="glass-card about-card reveal"><h3>Problem Solving</h3><p>My focus is on creating responsive interfaces, integrating APIs, writing maintainable code and solving development problems through practical implementation.</p></div></div></div></section>
+<section id="skills"><div class="container"><div class="section-heading reveal"><div class="section-label">02 · Skills</div><h2 class="section-title">My technical <span class="gradient-text">toolkit.</span></h2></div><div class="skills-grid"><div class="glass-card skill-card reveal"><div class="skill-icon">FE</div><h3>Frontend</h3><p>HTML5, CSS3, JavaScript, React.js, Next.js, Tailwind CSS and Bootstrap.</p></div><div class="glass-card skill-card reveal"><div class="skill-icon">BE</div><h3>Backend</h3><p>Node.js and Express.js for backend development and API-driven applications.</p></div><div class="glass-card skill-card reveal"><div class="skill-icon">DB</div><h3>Database</h3><p>MongoDB for storing and working with application data.</p></div><div class="glass-card skill-card reveal"><div class="skill-icon">DEV</div><h3>Development Tools</h3><p>Git, GitHub and VS Code for development, version control and workflow.</p></div></div><div class="skill-tags reveal"><span class="tag">HTML5</span><span class="tag">CSS3</span><span class="tag">JavaScript</span><span class="tag">React.js</span><span class="tag">Next.js</span><span class="tag">Node.js</span><span class="tag">Express.js</span><span class="tag">MongoDB</span><span class="tag">Tailwind CSS</span><span class="tag">Bootstrap</span><span class="tag">Git</span><span class="tag">GitHub</span><span class="tag">VS Code</span></div></div></section>
+<section id="projects"><div class="container"><div class="section-heading reveal"><div class="section-label">03 · Projects</div><h2 class="section-title">Selected <span class="gradient-text">work.</span></h2><p class="section-subtitle">A selection of projects demonstrating frontend development, API integration and responsive UI implementation.</p></div><div class="projects-grid"><article class="glass-card project-card reveal"><div class="project-number">PROJECT · 01</div><h3>Weather App</h3><p>A weather application that fetches real-time weather information using the OpenWeather API and displays weather conditions by city.</p><div class="project-tech"><span>JavaScript</span><span>API</span><span>OpenWeather</span></div><a href="#" class="project-link">Project Details <span>→</span></a></article><article class="glass-card project-card reveal"><div class="project-number">PROJECT · 02</div><h3>Movie Search App</h3><p>A React-based movie search application using an external API to retrieve and display real-time movie information with a responsive interface.</p><div class="project-tech"><span>React.js</span><span>API</span><span>Responsive UI</span></div><a href="#" class="project-link">Project Details <span>→</span></a></article><article class="glass-card project-card reveal"><div class="project-number">PROJECT · 03</div><h3>Demo Kart</h3><p>A responsive e-commerce frontend featuring product listings, categories, shopping cart functionality and reusable React components.</p><div class="project-tech"><span>React.js</span><span>Tailwind CSS</span><span>E-commerce</span></div><a href="#" class="project-link">Project Details <span>→</span></a></article></div></div></section>
+<section id="education"><div class="container"><div class="section-heading reveal"><div class="section-label">04 · Education</div><h2 class="section-title">Learning and <span class="gradient-text">growth.</span></h2></div><div class="glass-card timeline reveal"><div class="timeline-item"><h3>Bachelor of Computer Applications (BCA)</h3><div class="place">Vivekananda Global University, Jaipur</div><div class="date">2022 – 2026</div></div><div class="timeline-item"><h3>MERN Stack Development</h3><div class="place">WsCube Tech, Jaipur</div><div class="date">2025 – Present</div></div></div></div></section>
+<section id="contact"><div class="container"><div class="glass-card contact-card reveal"><div class="section-label">05 · Contact</div><h2 class="section-title">Let's build something <span class="gradient-text">useful.</span></h2><p>Interested in working together or discussing a professional opportunity? Feel free to connect with me through GitHub or LinkedIn.</p><div class="contact-buttons"><a href="https://github.com/harun0786" target="_blank" rel="noopener noreferrer" class="btn btn-primary social-btn"><span class="social-icon">GH</span> GitHub</a><a href="https://www.linkedin.com/in/mohammad-harun-aaa6a4341" target="_blank" rel="noopener noreferrer" class="btn social-btn"><span class="social-icon">in</span> LinkedIn</a><a href="tel:+919664149092" class="btn social-btn">📞 Call Me</a></div></div></div></section>
+</main>
+<footer><div class="container">© <span id="year"></span> Mohammad Harun · MERN Stack Developer</div></footer>
+<script>const menuBtn=document.getElementById('menuBtn'),navLinks=document.getElementById('navLinks');menuBtn.addEventListener('click',()=>navLinks.classList.toggle('open'));document.querySelectorAll('.nav-links a').forEach(a=>a.addEventListener('click',()=>navLinks.classList.remove('open')));const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target)}}),{threshold:.12});document.querySelectorAll('.reveal').forEach(e=>observer.observe(e));document.getElementById('year').textContent=new Date().getFullYear();</script>
 </body>
 </html>
